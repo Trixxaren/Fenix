@@ -1,18 +1,18 @@
 # Verifiering av Fenix V1
 
-Verifierat 27 oktober 2026 på Windows med Node 22.18.0.
+Uppgraderat från SDK 57 till SDK 58 (Expo 58.0.19, React Native 0.88.0, React 19.3.0) den 27 oktober 2026. Automatiska kontroller nedan avser SDK 58 på Windows med Node 22.18.0. Native-flikarna använder den stabila importen expo-router/native-tabs.
 
 ## Automatiskt
 
 - `npm run check`: TypeScript utan fel och 13 kontroller godkända.
-- `npx expo-doctor`: 21/21 kontroller godkända.
-- `npx expo install --check`: beroenden kompatibla med SDK 57:s lokala versionslista (offline).
+- `npx expo-doctor`: 20/20 kontroller godkända.
+- `npx expo install --check`: beroenden kompatibla med SDK 58:s rekommenderade versioner.
 - `npx expo export --platform all`: iOS- och Android-Hermes-bundlar samt webbexport genererade. Detta verifierar paketeringen, inte körning på fysisk enhet eller en signerad APK/IPA.
-- `npm audit`: 6 rapporterade träffar (3 moderate, 3 high) via `decode-uri-component`/`query-string`/`expo-router` och `zod`/`@expo/cli`/`expo`. Det är två underliggande advisories, med uppströms paket också räknade. SDK 57:s CLI använder Zod 3.25.76; det finns ingen senare version i Zod 3-serien vid kontrollen. Automatiskt föreslagen åtgärd byter Expo-huvudversion. Inga sådana versionsbyten har gjorts. Granska detta igen före publik release.
+- `npm audit`: 3 high-träffar via `zod`/`@expo/cli`/`expo`, vilket motsvarar en underliggande advisory. SDK 58-uppgraderingen tog bort de tidigare moderate-varningarna i Router. CLI använder fortfarande Zod 3.25.76. Ingen inkompatibel tvingad huvudversionsändring har gjorts. Granska den kvarvarande varningen igen före publik release.
 
 Testerna använder en minnesbaserad AsyncStorage-implementation med den riktiga lagringsadaptern. De verifierar profil- och nivåvalidering, kombinerade filter, kommadecimaler, tomläge, inloggning/onboarding/utloggning, profiländringar, vänlivscykel, öppen chatt, blockering, JSON-återläsning, skrivfel, trasig lagring och återställning.
 
-## Interaktivt verifierat i webbförhandsvisning
+## Interaktivt verifierat i webbförhandsvisning före uppgraderingen (SDK 57)
 
 - Onboarding med namn, ålder, demobild, flera sporter och ändring av nivåreglage.
 - Tomt formulär visar validering och kan rättas.

@@ -1,10 +1,10 @@
 # Fenix ↗
 
-Social mobilapp för att hitta sportkompisar i Stockholm. React Native, Expo SDK 57, TypeScript och Expo Router. V1 är ett lokalt demo utan backend, riktiga konton, lösenord eller externa API-integrationer.
+Social mobilapp för att hitta sportkompisar i Stockholm. React Native, Expo SDK 58, TypeScript och Expo Router. V1 är ett lokalt demo utan backend, riktiga konton, lösenord eller externa API-integrationer.
 
 ## Kör på mobilen
 
-Kräver Node.js 22 LTS och Expo Go med SDK 57-stöd.
+Kräver Node.js 22.13+ (22 LTS) och Expo Go med SDK 58-stöd.
 
 ```sh
 npm ci
@@ -62,3 +62,15 @@ På Windows kan Hermes nekas att skriva i en sandboxad temporärmapp. Ange då T
 Statiska exempelporträtt från [Random User](https://randomuser.me/) och [Unsplash](https://unsplash.com/) paketeras lokalt. Namn, åldrar, områden, biografier och relationer är helt fiktiva och beskriver inte människorna på bilderna. Appen anropar inte tjänsten. Initialer visas vid bildfel. V1 har en bild per profil.
 
 Ingen bokning, GPS, karta, kalender, träningsspårning, betalning, push, socialt inläggsflöde eller riktig autentisering ingår. Butikspublicering och signering är separata steg.
+
+## Om Expo Go visar fel SDK-version
+
+Projektet använder SDK 58. Hämta senaste koden och starta om Metro med tom cache:
+
+```sh
+git pull
+npm ci
+npx expo start --clear
+```
+
+Stoppa en tidigare Expo-server med Ctrl+C först och skanna sedan den nya QR-koden. SDK-versionen i projektet måste matcha Expo Go-appen på mobilen.
