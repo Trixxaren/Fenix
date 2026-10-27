@@ -13,6 +13,37 @@ npm start
 
 Skanna QR-koden med Expo Go (Android) eller Kamera (iOS). Mobilen och datorn ska kunna nå varandra på samma nätverk. Tillåt Node genom Windows-brandväggen om anslutningen blockeras. Ingen betaltjänst eller EAS-inloggning krävs.
 
+På fysisk iPhone kräver Expo Go att terminalens Expo CLI och Expo Go är inloggade på **samma Expo-konto**. Inloggning på expo.dev ensam loggar inte in terminalen. Kör `npx expo login`, kontrollera med `npx expo whoami` och logga in på samma konto via kontosymbolen i Expo Go. Detta är Expos utvecklingsverktyg; Fenix har fortfarande bara lokal demoinloggning.
+
+### Om webbläsarinloggning kraschar på Windows
+
+Om `npx expo login` kraschar med `cmd.exe /c start ... exited with non-zero code: 1`, stäng av automatisk webbläsaröppning för just inloggningen.
+
+I Git Bash:
+
+```sh
+BROWSER=none npx expo login
+```
+
+Låt terminalen fortsätta vänta. Kopiera **den nya länken som kommandot skriver ut** och öppna den manuellt i webbläsaren på samma dator. Slutför inloggningen där och vänta tills terminalen bekräftar att den lyckats. En gammal länk från en kraschad process fungerar inte eftersom dess lokala callback-server har stängts.
+
+I PowerShell är motsvarande kommando:
+
+```powershell
+$env:BROWSER = 'none'
+npx expo login
+Remove-Item Env:BROWSER
+```
+
+Kontrollera sedan kontot och starta om servern:
+
+```sh
+npx expo whoami
+npx expo start --clear
+```
+
+Logga in på samma konto i Expo Go och skanna den nya QR-koden. Se [Expos felsökningsguide för inloggning](https://docs.expo.dev/troubleshooting/expo-go-sign-in-required/).
+
 `npm run android` öppnar en installerad Android-emulator. `npm run web` ger en kompletterande förhandsvisning. Mobilappen är huvudprodukten.
 
 ## Flöden
